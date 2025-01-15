@@ -1,23 +1,26 @@
 import React from 'react'
 import { useState } from 'react'
+import { navLinks } from '../constants'
 
 const NavItems = () => {
     return (
         <ul className='nav-ul'>
-            {
-                
+            {navLinks.map(({id, href, name})=>  (
+                <li key={id} className='nav-li'>
+                    <a href={href} className='nav-li_a' onClick={() => {}}>{name}</a>
+                </li>
+            ))
             }
-
         </ul>
     )
-
 }
 
 const Navbar = () => {
-    const [isopen, setIsopen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
 
     const toggleMenu = () => {
-        setIsopen((prevIsOpen) => !prevIsOpen)
+        setIsOpen((prevIsOpen) => !prevIsOpen)
+        console.log(isOpen);        
     }
 
 
@@ -29,13 +32,17 @@ const Navbar = () => {
             Kaith
             </a>
             <button onClick={toggleMenu} className='text-neutral-400 hover:text-white focus:outline-none sm:hidden flex' aria-label='toggle menu'>
-                <img src={isopen ? "assets/close.svg" : "assets/menu.svg"} alt="toggle" className='w-6 h-6'/>
+                <img src={isOpen ? "assets/close.svg" : "assets/menu.svg"} alt="toggle" className='w-6 h-6'/>
             </button>
             <nav className='sm:flex hidden'>
-
+                <NavItems />
             </nav>
-
         </div>
+      </div>
+      <div className={`nav-sidebar ${isOpen ? 'max-h-screen' : 'max-h-0'}`}>
+        <nav className='p-5'>
+            <NavItems />
+        </nav>
       </div>
     </header>
   )
