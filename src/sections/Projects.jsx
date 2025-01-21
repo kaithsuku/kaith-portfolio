@@ -1,7 +1,32 @@
+import { Canvas } from "@react-three/fiber";
 import { myProjects } from "../constants"
+import { useState } from "react";
+import { Center } from "@react-three/drei";
+import CanvasLoader from "../components/CanvasLoader";
+import { Suspense } from "react";
+import DemoComputer from "../components/DemoComputer";
+import { OrbitControls } from "@react-three/drei";
+
+
+const projectCount = myProjects.length;
+
 const Projects = () => {
 
-    const currentProject = myProjects[0]
+    const [selectedProjectIndex, setSelectedProjectIndex] = useState(0)
+
+    const currentProject = myProjects[selectedProjectIndex]
+
+    const handleNavigation = (direction) => {
+        setSelectedProjectIndex((prevIndex) => {
+            if (direction === 'previoud' ) {
+                return previIndex === 0? projectCount - 1 : prevIndex - 1
+            }
+            else {
+                return prevIndex === projectCount - 1 ? 0 : prevIndex + 1
+            }
+        })
+
+    }
 
   return (
   <section className='c-space my-20'>
@@ -29,10 +54,38 @@ const Projects = () => {
                         </div>
                     ))}
                 </div>
+                <a href={currentProject.href} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-white-600">
+                    <p>Check Live Site</p>
+                    <img src="/assets/arrow-up.png" alt="Arrow" className="w-3 h-3" />
+                </a>
+            </div>
+            <div className="flex items-center justify-between mt-7">
+                    <button className="arrow-btn" onClick={() => handleNavigation('previous')}>
+                        <img src="/assets/left-arrow.png" alt="left Arrow" className="w-4 h-4"/>
+                    </button>
+                    <button className="arrow-btn" onClick={() => handleNavigation('previous')}>
+                         <img src="/assets/right-arrow.png" alt="RIght Arrow" className="w-4 h-4"/>  
+                    </button>                        
             </div>
         </div>
-    </div>
-    
+
+        <div className="border border-black-300 bg-black-200 rounded-lg h-96 md:h-full">
+            <Canvas>
+                <ambientLight intensity={Math.PI} />
+                <directionalLight position={[10, 10, 5]} intensity={1} />
+                <Center>
+                    <Suspense fallback={<CanvasLoader/>}>
+                        <group scale={2} position={[0, -3, 0]} rotation={[0, -0.1 , 0]}>
+                            <DemoComputer texture={currentProject.texture} />
+                        </group>
+                    </Suspense>
+                    </Center>
+                    <OrbitControls maxPolarAngle={Math.PI / 2} enableZoom={false}/>
+
+            </Canvas>
+
+        </div>
+    </div>    
   </section>
 
   )
