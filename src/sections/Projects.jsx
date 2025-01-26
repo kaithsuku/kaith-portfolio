@@ -6,6 +6,7 @@ import CanvasLoader from "../components/CanvasLoader";
 import { Suspense } from "react";
 import DemoComputer from "../components/DemoComputer";
 import { OrbitControls } from "@react-three/drei";
+import { useGSAP } from "@gsap/react";
 
 
 const projectCount = myProjects.length;
@@ -25,6 +26,10 @@ const Projects = () => {
                 return prevIndex === projectCount - 1 ? 0 : prevIndex + 1
             }
         })
+
+    //     useGSAP(() => {
+    //         gsap.fromTo(`.animatedText`, { opacity: 0 }, { opacity: 1, duration: 1, stagger: 0.2, ease: 'power2.inOut' });
+    //       }, [selectedProjectIndex]);
 
     }
 

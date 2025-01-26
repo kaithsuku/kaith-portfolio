@@ -47,8 +47,8 @@ const About = () => {
             <div>
               <p className="grid-headtext">Tech Stack</p>
               <p className="grid-subtext">
-                I specialize in Javascript/Typescript and have experience with
-                React, Next.js, Angular, Node.js, and other related technologies
+                I specialize in Javascript/Typescript, Python and have experience with
+                MERN/MEAN stack, Next.js, Firebase and other related technologies
               </p>
             </div>
           </div>
@@ -76,12 +76,14 @@ const About = () => {
                 />
             </div>
             <div>
-              <p className="grid-headtext">I can work remotely accross mot timezones</p>
+              <p className="grid-headtext">I can work remotely accross most timezones</p>
               <p className="grid-subtext">
                 I am based in New Delhi, India, and I am open to working with
                 clients from all over the world
               </p>
-              <Button name="Contact Me" isBeam containerClass='w-full mt-10'/>
+              <a href='#contact' className='w-fit'>
+              <Button name="Contact Me" isBeam containerClass='w-full mt-10' />
+              </a>
             </div>
           </div>
         </div>
